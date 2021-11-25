@@ -1,0 +1,8 @@
+@media only screen and (max-width: 500px) {
+  .details-container.request .details-main-div {
+    width: 100%;
+  }
+  .details-container.request mat-card-content form{
+    margin: -10px;
+  }
+}

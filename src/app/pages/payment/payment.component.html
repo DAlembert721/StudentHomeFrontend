@@ -1,0 +1,87 @@
+<div class="section-header">
+  <div  class="name-title">
+    <mat-icon>payment</mat-icon>
+    <span>Payment</span>
+  </div>
+</div>
+<div class="details-main-div contract">
+  <mat-card class="details-card">
+    <mat-card-header>
+      <mat-card-title>Payment Data </mat-card-title>
+      <mat-card-subtitle>Created at: {{payment.createdAt}}</mat-card-subtitle>
+    </mat-card-header>
+    <br><mat-divider></mat-divider>
+    <mat-divider></mat-divider><br>
+    <mat-card-content>
+      <div class="subDetails">
+        <div>
+          <h3>Student: {{student.firstName}} {{student.lastName}}</h3>
+          <p>Dni: {{student.dni}}</p>
+          <p>Phone: {{student.phone}} </p>
+          <p>Email: {{student.email}} </p>
+        </div>
+        <div>
+          <h3>Property: Title od Propety</h3>
+          <p>Cost: S/{{property.cost}}</p>
+          <p>Size: {{property.size}} m<sup>2</sup> </p>
+          <p>Address: {{property.address}}</p>
+        </div>
+      </div>
+      <mat-divider></mat-divider><br>
+      <div style="width: 100%" *ngIf="isView">
+        <p>Comment from the landlord: {{payment.comment}}</p>
+        <p><b>Amount: S/.{{payment.pay}}</b></p>
+        <p>
+          <img [src]="payment.image"
+               alt="Payment reference photo" width="100%">
+        </p>
+      </div>
+      <form #contractForm="ngForm" *ngIf="!isView">
+        <p>
+          <mat-form-field class="long-field">
+            <mat-label>Comment</mat-label>
+            <textarea matInput
+                      [(ngModel)]="dataField.comment"
+                      placeholder="Ex. I accept... ."
+                      name="content"
+                      required> </textarea>
+          </mat-form-field>
+        </p>
+        <p>
+          <mat-form-field>
+            <mat-label>Amount (S/.)</mat-label>
+            <input matInput
+                   [(ngModel)]="dataField.pay"
+                   placeholder="Ex. 1000"
+                   name="cost"
+                   type="number"
+                   value="1000">
+          </mat-form-field>
+        </p>
+        <div>
+          <!--button button mat-flat-button class="card-button">Update Image</button-->
+          <mat-form-field>
+            <mat-label>Image Url</mat-label>
+            <input matInput
+                   [(ngModel)]="dataField.image"
+                   placeholder="Url"
+                   name="url"
+            >
+          </mat-form-field>
+          <p align="center">
+            <img width="50%"
+                 src="https://www.b-payment.com/docs/images/securepay/securepay_17_EN_successful_payment.jpeg"
+                 alt="">
+          </p>
+        </div>
+      </form>
+    </mat-card-content>
+    <mat-card-actions align="end" style="height: auto; padding-bottom: 10px" *ngIf="!isView">
+      <button button mat-flat-button class="card-button" (click)="updatePayment()">Accept</button>
+      <button button mat-flat-button class="card-button" (click)="isView = !isView">Cancel</button>
+    </mat-card-actions>
+    <mat-card-actions *ngIf="isView && !payment.checked">
+      <button button mat-flat-button class="card-button" (click)="isView=false">Edit</button>
+    </mat-card-actions>
+  </mat-card>
+</div>

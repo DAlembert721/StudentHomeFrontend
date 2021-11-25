@@ -1,0 +1,47 @@
+<div class="section-header">
+  <div  class="name-title">
+    <mat-icon>receipt</mat-icon>
+    <span>Making request</span>
+  </div>
+</div>
+<div class="details-container request">
+  <div class="details-main-div">
+    <mat-card class="details-card">
+      <mat-card-header>
+        <mat-card-title>{{propertyData.title}}</mat-card-title>
+      </mat-card-header>
+      <img mat-card-image src="https://thumbnails.trvl-media.com/4lHYcVp1zF-KThpkhYr9pkoL3Wk=/500x333/smart/filters:quality(80)/images.trvl-media.com/hotels/39000000/38770000/38768300/38768271/93b018fe_z.jpg"
+           alt="Property reference photo">
+      <mat-card-content class="subDetails">
+        <div class="sub-container">
+          <p class="description">
+            {{propertyData.description}}
+          </p>
+          <p>
+            Cost: S/.{{propertyData.cost}}
+            Location: {{propertyData.address}}
+          </p>
+        </div>
+        <form (ngSubmit)="onSubmit()" #requestForm="ngForm">
+          <p style="width: 400px">
+            <mat-form-field class="long-field">
+              <mat-label>Content</mat-label>
+              <textarea matInput placeholder="Ex. I'm a quiet student. I want to live near The University,
+               this place seems to be wonderful.
+               I'm interested in this property, but I have a pet
+               (it's an small dog) Can I live here with it? If I can,
+                please accept my request." name="content" required [(ngModel)]="requestData.content">
+              </textarea>
+            </mat-form-field>
+          </p>
+        </form>
+      </mat-card-content>
+      <mat-card-actions align="end" style="margin-right: 20px">
+        <button mat-flat-button class="card-button" (click)="sendRequest()">
+          <mat-icon>done</mat-icon> Add</button>
+        <button mat-flat-button class="card-button" (click)="navigateToProperties()">
+          <mat-icon>clear</mat-icon> Cancel</button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</div>

@@ -1,0 +1,133 @@
+<div class="main-div">
+  <mat-card class="login-container">
+    <mat-card-header>
+      <mat-card-title>Register</mat-card-title>
+    </mat-card-header>
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+      <mat-card-content>
+        <mat-form-field appearance="outline" class="form-field">
+          <mat-label>E-mail</mat-label>
+          <input matInput formControlName="email" type="email"
+                 placeholder="Ex. user123@yourmail.com" required [(ngModel)]="userData.email">
+          <mat-error *ngIf="registerForm.controls.email.touched && registerForm.controls.email.invalid">
+            <span *ngIf="registerForm.controls.email.errors.required">E-mail is required!</span>
+            <span *ngIf="registerForm.controls.email.errors.email">E-mail must be a valid E-mail address!</span>
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="form-field">
+          <mat-label>Password</mat-label>
+          <input matInput formControlName="password" type="password"
+                 placeholder="Insert your password" required minlength="4" [(ngModel)]="userData.password">
+          <mat-error *ngIf="registerForm.controls.password.touched && registerForm.controls.password.invalid">
+            <span *ngIf="registerForm.controls.password.errors.required">Password is required!</span>
+            <span *ngIf="registerForm.controls.password.errors.minlength">Password must have at least 4 characters!</span>
+          </mat-error>
+        </mat-form-field>
+        <mat-radio-group aria-label="Select an option">
+          <p>Are you a student or a landlord?</p>
+          <mat-radio-button value="1" (click)="selectStudent()">Student</mat-radio-button>
+          <mat-radio-button value="2" (click)="selectLandlord()">Landlord</mat-radio-button>
+        </mat-radio-group>
+
+        <mat-form-field appearance="outline" class="form-field">
+          <mat-label>First Name</mat-label>
+          <input matInput formControlName="firstName"
+                 placeholder="Insert your first name" required minlength="2" [(ngModel)]="accountData.firstName">
+          <mat-error *ngIf="registerForm.controls.firstName.touched && registerForm.controls.firstName.invalid">
+            <span *ngIf="registerForm.controls.firstName.errors.required">Your first name is required!</span>
+            <span *ngIf="registerForm.controls.firstName.errors.minlength">Your first name should have at least 2 characters!</span>
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="form-field">
+          <mat-label>Last Name</mat-label>
+          <input matInput formControlName="lastName"
+                 placeholder="Insert your last name" required minlength="2" [(ngModel)]="accountData.lastName">
+          <mat-error *ngIf="registerForm.controls.lastName.touched && registerForm.controls.lastName.invalid">
+            <span *ngIf="registerForm.controls.lastName.errors.required">Your last name is required!</span>
+            <span *ngIf="registerForm.controls.lastName.errors.minlength">Your last name should have at least 2 characters!</span>
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="form-field">
+          <mat-label>DNI</mat-label>
+          <input matInput formControlName="dni"
+                 placeholder="Insert your DNI" required minlength="8" [(ngModel)]="accountData.dni">
+          <mat-error *ngIf="registerForm.controls.dni.touched && registerForm.controls.dni.invalid">
+            <span *ngIf="registerForm.controls.dni.errors.required">Your DNI is required!</span>
+            <span *ngIf="registerForm.controls.dni.errors.minlength">Your DNI should have at least 8 characters!</span>
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="form-field">
+          <mat-label>Phone number</mat-label>
+          <input matInput formControlName="phone"
+                 placeholder="Insert your phone number" required minlength="9" [(ngModel)]="accountData.phone">
+          <mat-error *ngIf="registerForm.controls.phone.touched && registerForm.controls.phone.invalid">
+            <span *ngIf="registerForm.controls.phone.errors.required">Your phone number is required!</span>
+            <span *ngIf="registerForm.controls.phone.errors.minlength">Your phone number should have at least 9 characters!</span>
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="form-field" *ngIf="isStudent">
+          <mat-label>Address</mat-label>
+          <input matInput formControlName="address"
+                 placeholder="Insert your address" required minlength="5" [(ngModel)]="studentData.address">
+          <mat-error *ngIf="registerForm.controls.address.touched && registerForm.controls.address.invalid">
+            <span *ngIf="registerForm.controls.address.errors.required">Your address is required!</span>
+            <span *ngIf="registerForm.controls.address.errors.minlength">Your address should have at least 5 characters!</span>
+          </mat-error>
+        </mat-form-field>
+        <div>
+          <mat-form-field class="example-full-width"
+                          appearance="fill">
+            <mat-label>Region</mat-label>
+            <mat-select [(value)]="selectedRegion">
+              <mat-option *ngFor="let region of regions"
+                          (onSelectionChange)="retrieveProvinces(region.id)"
+                          [value]="region"
+              >
+                {{region.name}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field class="example-full-width"
+                          appearance="fill">
+            <mat-label>Province</mat-label>
+            <mat-select [(value)]="selectedProvince">
+              <mat-option *ngFor="let province of provinces"
+                          [value]="province"
+                          (onSelectionChange)="retrieveDistricts(province.id)">
+                {{province.name}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field class="example-full-width"
+                          appearance="fill">
+            <mat-label>District</mat-label>
+            <mat-select [(value)]="selectedDistrict">
+              <mat-option [value]="district"
+                          *ngFor="let district of districts">
+                {{district.name}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field class="example-full-width"
+                          appearance="fill">
+            <mat-label>Education Center</mat-label>
+            <mat-select [(value)]="selectedEducationCenter">
+              <mat-option [value]="educationCenter"
+                          *ngFor="let educationCenter of educationCenters">
+                {{educationCenter.name}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </mat-card-content>
+      <mat-card-actions align="center">
+        <button mat-raised-button color="primary" type="submit" [disabled]="registerForm.invalid" (click)="addUser()">Register</button>
+      </mat-card-actions>
+      <mat-card-footer>
+        <p class="text-link" align="center" (click)="navigateToLogin()">Already have an account? Login!</p>
+      </mat-card-footer>
+    </form>
+  </mat-card>
+</div>

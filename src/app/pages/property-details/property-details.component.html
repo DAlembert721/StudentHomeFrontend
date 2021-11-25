@@ -1,0 +1,89 @@
+<div class="section-header">
+  <div  class="name-title">
+    <mat-icon>house</mat-icon>
+    <span>Property Details</span>
+  </div>
+</div>
+<div class="details-container property">
+  <div class="side-images">
+    <div *ngFor="let image of imgUrls" class="side-image">
+      <img (click)="changeImage(image)" [src]="image" alt="property img">
+      <div *ngIf="image === selectedIng" class="selected-img">Selected image</div>
+    </div>
+  </div>
+  <div class="details-main-div">
+    <mat-card class="details-card" style="height: 100%">
+      <mat-card-header>
+        <mat-card-title> {{ propertyData.title }} </mat-card-title>
+        <mat-card-subtitle>Property offered by {{propertyData.landLordFirstName}} {{propertyData.landLordLastName}}</mat-card-subtitle>
+      </mat-card-header>
+      <img mat-card-image [src]="selectedIng" class="main-img" alt="Property image">
+      <mat-card-content class="subDetails">
+        <p class="description">
+          {{propertyData.description}}
+        </p>
+        <div class="details-container">
+          <div>
+            <h3>More info</h3>
+            <p>Number of rooms: {{propertyData.rooms}}</p>
+            <p>Size: {{propertyData.size}}</p>
+            <p>Cost: S/.{{propertyData.cost}}</p>
+            <p>Address: {{propertyData.address}}</p>
+            <p>Location: {{propertyData.regionName}},{{propertyData.provinceName}},{{propertyData.districtName}}</p>
+          </div>
+          <mat-divider [vertical]="true"></mat-divider>
+          <div>
+            <h3>Services</h3>
+            <p *ngFor="let service of services">
+              &#10004; {{service.name}}
+            </p>
+          </div>
+        </div>
+      </mat-card-content>
+      <mat-card-actions align="center">
+        <button mat-flat-button class="card-button" *ngIf="!showQualification" (click)="showQualification = true">
+          <mat-icon>comment</mat-icon> Show comments </button>
+        <button mat-flat-button class="card-button" *ngIf="showQualification" (click)="showQualification = false">
+          <mat-icon>comment</mat-icon> Hide comments </button>
+        <button mat-flat-button class="card-button"  (click)="navigateToRequest()" *ngIf="type==='student'">Rent</button>
+        <button mat-flat-button class="card-button"  (click)="navigateToEdit()"  *ngIf="type==='landlord'">Edit</button>
+        <br><br>
+      </mat-card-actions>
+      <mat-card-footer class="comments"  align="center">
+        <div *ngIf="showQualification">
+          <div class="comment" *ngFor="let propertyComment of propertyComments">
+            <div  class="comment-info">
+              <img class="profile" [src]="propertyComment.studentImage"
+                   [alt]="propertyComment.studentFirstName+' '+propertyComment.studentLastName+' profile image'">
+              <p> <b>{{propertyComment.studentFirstName}} {{propertyComment.studentLastName}}</b></p>
+              <p>{{propertyComment.createdAt}}</p>
+              <div class="comment-star">
+                <div *ngIf="propertyComment.score == 1">
+                  <mat-icon>star</mat-icon><mat-icon>star_border</mat-icon><mat-icon>star_border</mat-icon>
+                  <mat-icon>star_border</mat-icon><mat-icon>star_border</mat-icon>
+                </div>
+                <div *ngIf="propertyComment.score == 2">
+                  <mat-icon>star</mat-icon>  <mat-icon>star</mat-icon>
+                  <mat-icon>star_border</mat-icon><mat-icon>star_border</mat-icon><mat-icon>star_border</mat-icon>
+                </div>
+                <div *ngIf="propertyComment.score == 3">
+                  <mat-icon>star</mat-icon><mat-icon>star</mat-icon><mat-icon>star</mat-icon>
+                  <mat-icon>star_border</mat-icon><mat-icon>star_border</mat-icon>
+                </div>
+                <div *ngIf="propertyComment.score == 4">
+                  <mat-icon>star</mat-icon><mat-icon>star</mat-icon><mat-icon>star</mat-icon>
+                  <mat-icon>star</mat-icon><mat-icon>star_border</mat-icon>
+                </div>
+                <div *ngIf="propertyComment.score == 5">
+                  <mat-icon>star</mat-icon><mat-icon>star</mat-icon><mat-icon>star</mat-icon>
+                  <mat-icon>star</mat-icon><mat-icon>star</mat-icon>
+                </div>
+              </div>
+            </div>
+            <p class="comment-description">{{propertyComment.comment}}</p>
+          </div>
+        </div>
+      </mat-card-footer>
+    </mat-card>
+  </div>
+</div>

@@ -1,0 +1,18 @@
+.request .grid-card{
+  width: 500px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.request .mat-card-actions{
+  height: 40px;
+}
+
+@media only screen and (max-width: 500px) {
+  .request .grid-card{
+    width: 100%;
+  }
+  .request mat-card.mat-card.mat-focus-indicator.grid-card.ng-star-inserted {
+    display: block;
+  }
+}

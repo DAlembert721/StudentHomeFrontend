@@ -1,0 +1,104 @@
+<div class="section-header">
+  <div  class="name-title">
+    <mat-icon>money</mat-icon>
+    <span>Payment history</span>
+  </div>
+</div>
+
+<!--  List of filters-->
+<div class="search-container">
+
+  <!--  List of results-->
+  <mat-card class="result">
+    <mat-card-header>
+      <mat-card-title>Payments - Use filters to search </mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div align="center">
+        <mat-form-field style="width: 80%">
+          <mat-label>Filter Results</mat-label>
+          <input matInput (keyup)="applyFilter($event)" placeholder="Ex. UPC" #input>
+        </mat-form-field>
+        <!--p>
+          <mat-form-field appearance="fill">
+            <mat-label>By Property</mat-label>
+            <mat-select>
+              <mat-option *ngFor="let property of [1,2,3]" [value]="property.value">
+                Property {{property}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field appearance="fill" *ngIf="type==='landlord'">
+            <mat-label>By Student</mat-label>
+            <mat-select>
+              <mat-option *ngFor="let student of [1,2,3]" [value]="student.value">
+                Student {{student}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field appearance="fill">
+            <mat-label>By Contract</mat-label>
+            <mat-select>
+              <mat-option *ngFor="let contract of [1,2,3]" [value]="contract.value">
+                Contract {{contract}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </p-->
+        <p style="margin-top: -10px">
+          <mat-form-field appearance="fill">
+            <mat-label>From (created)</mat-label>
+            <input matInput [matDatepicker]="pickerStart">
+            <mat-datepicker-toggle matSuffix [for]="pickerStart"></mat-datepicker-toggle>
+            <mat-datepicker #pickerStart></mat-datepicker>
+          </mat-form-field>
+          <mat-form-field appearance="fill">
+            <mat-label>To (updated)</mat-label>
+            <input matInput [matDatepicker]="pickerEnd">
+            <mat-datepicker-toggle matSuffix [for]="pickerEnd"></mat-datepicker-toggle>
+            <mat-datepicker #pickerEnd></mat-datepicker>
+          </mat-form-field>
+          <button mat-flat-button class="card-button" style="padding-left: 20px">Search</button>
+        </p>
+      </div>
+      <table mat-table [dataSource]="dataSource" align="center" >
+        <ng-container matColumnDef="image">
+          <th mat-header-cell *matHeaderCellDef ></th>
+          <td mat-cell *matCellDef="let element">
+            <img class="datasource-img" [src]="element.image" alt=""></td>
+        </ng-container >
+        <ng-container matColumnDef="id" >
+          <th mat-header-cell *matHeaderCellDef>Id</th>
+          <td mat-cell *matCellDef="let element" class="td-element">{{ element.id }}</td>
+        </ng-container >
+        <ng-container matColumnDef="pay" >
+          <th mat-header-cell *matHeaderCellDef >Pay</th>
+          <td mat-cell *matCellDef="let element" class="td-element">{{ element.pay }}</td>
+        </ng-container >
+        <ng-container matColumnDef="comment" >
+          <th mat-header-cell *matHeaderCellDef >Comment</th>
+          <td mat-cell *matCellDef="let element" class="td-element">{{ element.comment }}</td>
+        </ng-container >
+        <ng-container matColumnDef="createdAt" >
+          <th mat-header-cell *matHeaderCellDef >CreatedAt</th>
+          <td mat-cell *matCellDef="let element" class="td-element" >Created At <br>{{ element.createdAt }}</td>
+        </ng-container >
+        <ng-container matColumnDef="updatedAt" >
+          <th mat-header-cell *matHeaderCellDef >UpdatedAt</th>
+          <td mat-cell *matCellDef="let element" class="td-element">Updated At <br>{{ element.updatedAt }}</td>
+        </ng-container >
+        <ng-container matColumnDef="actions" class="actions">
+          <mat-header-cell *matHeaderCellDef > </mat-header-cell >
+          <td mat-cell *matCellDef="let element"  class="td-element">
+            <button mat-flat-button class="card-button" (click)="navigateToPayment(element.id)">View</button>
+          </td >
+        </ng-container >
+        <tr mat-header-row *matHeaderRowDef="displayedColumns" ></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;" ></tr>
+      </table>
+      <mat-paginator [pageSize]="10" [pageSizeOptions]="[10, 20, 50]" showFirstLastButtons></mat-paginator>
+    </mat-card-content>
+  </mat-card>
+
+</div>
+

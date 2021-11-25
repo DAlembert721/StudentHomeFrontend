@@ -1,0 +1,68 @@
+<div class="section-header">
+  <div  class="name-title">
+    <mat-icon>book</mat-icon>
+    <span *ngIf="!isView">Making</span> Contract
+  </div>
+</div>
+<div class="details-main-div contract">
+  <mat-card class="details-card">
+    <mat-card-header>
+      <mat-card-title *ngIf="!isView">Accept request - Make Contract </mat-card-title>
+      <mat-card-title *ngIf="isView">Contract {{contractId}}</mat-card-title>
+      <mat-card-subtitle>Created at: {{requestData.createdAt}}</mat-card-subtitle>
+    </mat-card-header>
+    <br><mat-divider></mat-divider>
+    <div class="details-container img" style="width: 100%">
+      <img [src]="studentImage" alt="student reference photo">
+      <img src="https://thumbnails.trvl-media.com/4lHYcVp1zF-KThpkhYr9pkoL3Wk=/500x333/smart/filters:quality(80)/images.trvl-media.com/hotels/39000000/38770000/38768300/38768271/93b018fe_z.jpg"
+           alt="Property reference photo">
+    </div>
+    <mat-divider></mat-divider><br>
+    <mat-card-content>
+      <p *ngIf="!isView"> {{requestData.content}} </p>
+      <div class="subDetails">
+        <div>
+          <h3>Sender: {{studentData.firstName}} {{studentData.lastName}}</h3>
+          <p>Dni: {{studentData.dni}}</p>
+          <p>Phone: {{studentData.phone}}</p>
+          <p>Email: {{studentData.email}}</p>
+        </div>
+        <div>
+          <h3>Property: {{propertyData.title}}</h3>
+          <p>Cost: {{propertyData.cost}}</p>
+          <p>Size: {{propertyData.size}}</p>
+          <p>Address: {{propertyData.address}}</p>
+        </div>
+      </div>
+      <mat-divider></mat-divider><br>
+      <div *ngIf="isView">
+        <p>Created at: {{contractData.createdAt}}</p>
+        <p>{{contractData.description}}</p>
+        <p>Amount: S/. {{contractData.amount}}</p>
+      </div>
+      <form (ngSubmit)="onSubmit()" #contractForm="ngForm" *ngIf="!isView">
+        <p>
+          <mat-form-field class="long-field">
+            <mat-label>Description</mat-label>
+            <textarea matInput placeholder="Ex. I accept... ." name="content" required [(ngModel)]="contractData.description">
+              </textarea>
+          </mat-form-field>
+        </p>
+        <p>
+          <mat-form-field>
+            <mat-label>Amount (S/.)</mat-label>
+            <input matInput placeholder="Ex. 1000" name="cost" type="number" required [(ngModel)]="contractData.amount">
+          </mat-form-field>
+        </p>
+      </form>
+    </mat-card-content>
+    <mat-card-actions align="end" style="height: auto; padding-bottom: 10px" *ngIf="!isView">
+      <button button mat-flat-button class="card-button" (click)="acceptRequest()">Add</button>
+      <button button mat-flat-button class="card-button" (click)="navigateToRequests()">Cancel</button>
+    </mat-card-actions>
+    <mat-card-actions align="center" *ngIf="isView">
+      <button button mat-flat-button class="card-button" (click)="addPayment()">Add Payment</button>
+      <button button mat-flat-button class="card-button" (click)="navigateToList()">See payments</button>
+    </mat-card-actions>
+  </mat-card>
+</div>

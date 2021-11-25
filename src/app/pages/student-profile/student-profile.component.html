@@ -1,0 +1,66 @@
+<p>student-profile works!</p>
+<div class="section-header">
+  <div  class="name-title">
+    <mat-icon>perm_identity</mat-icon>
+    <span *ngIf="type==='student'">Welcome {{studentData.firstName}} {{studentData.lastName}}!</span>
+    <span *ngIf="type==='landlord'">Welcome to {{studentData.firstName}} {{studentData.lastName}} profile!</span>
+  </div>
+</div>
+
+<div class="details-container">
+  <mat-card class="details-card profile-card">
+    <mat-card-header align="center">
+      <mat-card-title>
+        <img class="profile" src="https://happytravel.viajes/wp-content/uploads/2020/04/146-1468479_my-profile-icon-blank-profile-picture-circle-hd.png"
+             alt="Landlord profile pic">
+      </mat-card-title>
+    </mat-card-header>
+    <mat-card-content class="info">
+      <div>
+        <button mat-flat-button class="card-button" *ngIf="!isEditMode">Change picture</button>
+      </div>
+      <p><mat-icon>home</mat-icon> Reviews: {{opinions.length}}</p>
+      <p><mat-icon>person</mat-icon>{{studentData.firstName}} {{studentData.lastName}}</p>
+      <p><mat-icon>phone</mat-icon> Phone: {{studentData.phone}}</p>
+      <p><mat-icon>email</mat-icon> Email: {{studentData.email}}</p>
+      <br>
+    </mat-card-content>
+  </mat-card>
+  <div class="subDetails">
+    <mat-card style="width: 90%">
+      <mat-card-header>
+        <mat-card-subtitle>Hello! I study in </mat-card-subtitle>
+        <mat-card-title>{{studentData.educationCenterName}}</mat-card-title>
+      </mat-card-header>
+      <mat-card-content class="description-text">
+        <p>  {{studentData.description}}  </p>
+      </mat-card-content>
+    </mat-card>
+    <div style="width: 100%">
+      <div class="section-header">
+        <p class="name-title">
+          <mat-icon>comment</mat-icon>
+          Reviews </p>
+      </div>
+      <mat-card>
+        <mat-card-content>
+          <button mat-flat-button class="card-button" *ngIf="!showQualification" (click)="showQualification = true">
+            <mat-icon>comment</mat-icon> Show comments </button>
+          <button mat-flat-button class="card-button" *ngIf="showQualification" (click)="showQualification = false">
+            <mat-icon>comment</mat-icon> Hide comments </button>
+        </mat-card-content>
+        <mat-card-footer  class="comments" *ngIf="showQualification">
+          <div class="comment" *ngFor="let opinion of opinions">
+            <div  class="comment-info">
+              <img class="profile" [src]="landlordImage" alt="profile image">
+              <p><b>Name of landlord</b></p>
+              <p>xx/xx/xxx xx:xx xx</p>
+              <mat-icon *ngFor="let index of generateArray(opinion.score)">star_rate</mat-icon>
+            </div>
+            <p class="comment-description">{{opinion.content}}</p>
+          </div>
+        </mat-card-footer>
+      </mat-card>
+    </div>
+  </div>
+</div>

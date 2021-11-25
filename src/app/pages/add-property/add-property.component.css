@@ -1,0 +1,43 @@
+.property-editORadd .details-card {
+  width: 80%;
+  margin: auto;
+  margin-bottom: 30px;
+}
+.side-images{
+  display: flex;
+  flex-wrap: wrap;
+}
+.side-images img{
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  margin: 5px;
+}
+.side-images {
+  position: relative;
+  width: 50%;
+}
+.side-images .delete{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  background-color: rgba(255, 255, 255, 0.56);
+  color: #000000;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  border-radius: 70%;
+  display: flex;
+  justify-content: center;
+}
+
+
+.side-images .delete:hover {
+  background-color: rgba(126, 126, 126, 0.66);
+}
+@media only screen and (max-width: 1200px){
+  .property-editORadd .details-card { width: 100%;}
+}
+

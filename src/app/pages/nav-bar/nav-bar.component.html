@@ -1,0 +1,40 @@
+<div *ngIf="state">
+  <mat-sidenav-container class="sidenav-container">
+    <mat-sidenav #sidenav class="sidenav" mode="over">
+      <mat-list>
+        <mat-list-item class="list-item list-nav-item"
+                       *ngFor="let option of options"
+                       (click)="redirectOption(option); sidenav.toggle()">
+          <div fxLayout="row">
+            <mat-icon>{{ option.icon }}</mat-icon>
+            <span>{{ option.text }}</span>
+          </div>
+        </mat-list-item>
+      </mat-list>
+    </mat-sidenav>
+    <mat-sidenav-content>
+      <mat-toolbar class="nav-bar our-toolbar mat-elevation-z7">
+        <mat-toolbar-row>
+          <button mat-button *ngIf="type !== null"
+                  (click)="sidenav.toggle()">
+            <mat-icon>menu</mat-icon>
+          </button>
+          <button mat-icon-button (click)="goToHome()">
+            <img src="../../../assets/logo-horizontal.svg" alt="Student Home" class="logo-navbar">
+          </button>
+          <span class="default-spacer"></span>
+          <div >
+            <a mat-flat-button
+               *ngIf="type !== null"
+               (click)="changeNull()" style="margin-right: 10px">Log out</a>
+          </div>
+        </mat-toolbar-row>
+      </mat-toolbar>
+      <div class="container">
+        <router-outlet></router-outlet>
+      </div>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+
+</div>
+

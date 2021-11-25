@@ -1,0 +1,43 @@
+.details-container.property mat-divider{
+  margin-left: 10px;
+  margin-right: 10px;
+}
+.side-images{
+  padding: 20px;
+  display: block;
+}
+.side-images img{
+  cursor: pointer;
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+}
+.selected-img{
+  background-color: whitesmoke;
+  width: 100px;
+  height: 100px;
+  margin-top: -105px;
+  position: absolute;
+  text-align: center;
+  mix-blend-mode: screen;
+}
+@media only screen and (max-width: 500px) {
+  .details-container{
+    flex-direction: column;
+    align-items: center;
+  }
+  .side-images{
+    display: flex;
+    flex-wrap: wrap;
+    padding-top: 0;
+  }
+  .side-images img{
+    width: 70px;
+    height: 70px;
+  }
+  .selected-img{
+    width: 70px;
+    height: 70px;
+    margin-top: -75px;
+  }
+}

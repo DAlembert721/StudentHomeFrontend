@@ -1,0 +1,144 @@
+<div class="section-header">
+  <div class="name-title" *ngIf="isEdit">
+    <mat-icon>edit</mat-icon>
+    <span>Edit property</span>
+  </div>
+  <div class="name-title" *ngIf="!isEdit">
+    <mat-icon>new</mat-icon>
+    <span>Add property</span>
+  </div>
+</div>
+<div class="property-editORadd details-container">
+  <div class="details-main-div">
+    <mat-card class="details-card">
+      <mat-card-header>
+        <mat-card-subtitle>
+          <span *ngIf="isEdit"> Updated at: </span>
+          <span *ngIf="!isEdit"> Created at: </span>
+          {{actualDate}}
+        </mat-card-subtitle>
+      </mat-card-header>
+      <mat-divider></mat-divider>
+      <br>
+      <mat-card-content>
+        <form
+          #propertyForm="ngForm">
+          <p>
+            <mat-form-field class="long-field">
+              <mat-label>Title</mat-label>
+              <input matInput placeholder="Ex. It's a title" name="title"
+                     [(ngModel)]="propertyData.title" [value]="propertyData.title">
+            </mat-form-field>
+          </p>
+          <p class="form-line">
+            <mat-form-field class="long-field">
+              <mat-label>Description</mat-label>
+              <textarea matInput placeholder="Ex. It's a description" maxlength="200" name="description"
+                        [(ngModel)]="propertyData.description" [value]="propertyData.description">
+                </textarea>
+            </mat-form-field>
+          </p>
+          <p class="form-line">
+            <mat-form-field>
+              <mat-label>Number of Rooms</mat-label>
+              <input matInput placeholder="Ex. 4" name="rooms" type="number"
+                     required [(ngModel)]="propertyData.rooms" [value]="propertyData.rooms">
+            </mat-form-field>
+            <mat-form-field>
+              <mat-label>Size</mat-label>
+              <input matInput placeholder="Ex. 200" name="size" type="number"
+                     required [(ngModel)]="propertyData.size" [value]="propertyData.size">
+            </mat-form-field>
+            <mat-form-field>
+              <mat-label>Cost (S/.)</mat-label>
+              <input matInput placeholder="Ex. 1000" name="cost" type="number"
+                     required [(ngModel)]="propertyData.cost" [value]="propertyData.cost">
+            </mat-form-field>
+          </p>
+          <mat-divider></mat-divider>
+          <br>
+          <p class="form-line">
+            <mat-form-field appearance="fill">
+              <mat-label>Region</mat-label>
+              <mat-select
+                [(value)]="selectedRegion">
+                <mat-option *ngFor="let region of regions"
+                            (onSelectionChange)="retrieveProvinces(region.id)"
+                            [value]="region">
+                  {{region.name}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+            <mat-form-field class="example-full-width" appearance="fill">
+              <mat-label>Province</mat-label>
+              <mat-select
+                [(value)]="selectedProvince">
+                <mat-option *ngFor="let province of provinces"
+                            [value]="province"
+                            (onSelectionChange)="retrieveDistricts(province.id)">
+                  {{province.name}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+            <mat-form-field class="example-full-width" appearance="fill">
+              <mat-label>District</mat-label>
+              <mat-select [(value)]="selectedDistrict">
+                <mat-option
+                  [value]="district"
+                  *ngFor="let district of districts">
+                  {{district.name}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </p>
+          <p>
+            <mat-form-field class="long-field">
+              <mat-label>Address</mat-label>
+              <input matInput placeholder="Ex. Jr. Anywhere" name="address"
+                     required [(ngModel)]="propertyData.address" (volumechange)="propertyData.address">
+            </mat-form-field>
+          </p>
+          <div class="form-line">
+              <span *ngFor="let service of services" style="width: 150px">
+                <input type="checkbox"
+                       [ngModelOptions]="{standalone: true}"
+                       [(ngModel)]="servicesSelected[services.indexOf(service)]"
+                >{{service.name}}
+              </span>
+          </div>
+          <br>
+          <mat-divider></mat-divider>
+          <br>
+          <!--div>
+            <input hidden type="file" (change)="onFileUpload($event)" #fileInput>
+            <button class="mat-flat-button card-button"
+                    (click)="fileInput.click()">Update image
+            </button>
+            <span> {{fileName}} </span><br>
+          </div-->
+          <div class="side-images">
+            <div *ngFor="let image of imgUrls" class="side-images">
+              <div class="side-image">
+                <img
+                  [src]="image"
+                  alt="property img">
+                <button mat-mini-fab class="delete"
+                        (click)="deleteImage(image)">
+                  <mat-icon class="btn-icon">clear</mat-icon>
+                </button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </mat-card-content>
+      <mat-card-actions>
+        <div align="end">
+          <button mat-flat-button type="submit" class="card-button" (click)="addOrUpdateProperty()" *ngIf="!isEdit">Add</button>
+          <button mat-flat-button type="submit" class="card-button" (click)="addOrUpdateProperty()" *ngIf="isEdit">Accept</button>
+          <button mat-flat-button type="reset" class="card-button" (click)="navigateToPropertiesList()">Cancel</button>
+        </div>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</div>
+

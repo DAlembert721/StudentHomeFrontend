@@ -1,0 +1,27 @@
+.details-container mat-card{
+  margin-bottom: 15px;
+}
+.details-card.subscription mat-card-header{
+  margin-bottom: 20px;
+}
+.header-plan{
+  text-align: start;
+  padding-top: 30px;
+  height: 80px;
+}
+.details-card.subscription mat-card-header .head-icon{
+  font-size: 70px;
+  color: white;
+  margin: 20px 20px 10px 10px;
+  padding-bottom: 40px;
+  padding-right: 60px;
+}
+.bullets span{
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  color: black;
+}
+.divider {
+  margin-top:50em;
+}

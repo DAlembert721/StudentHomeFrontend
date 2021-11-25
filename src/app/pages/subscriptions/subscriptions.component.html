@@ -1,0 +1,99 @@
+<div class="subscription-plan">
+  <div class="section-header">
+    <div  class="name-title">
+      <mat-icon>monetization_on</mat-icon>
+      <span>Your PLAN!</span>
+    </div>
+  </div>
+  <div class="details-main-div">
+    <mat-card class="details-card subscription">
+      <mat-card-header *ngIf="plan!=='None'" align="center" [style]="backgroundStyle">
+        <mat-icon class="head-icon">sentiment_satisfied</mat-icon>
+        <div class="header-plan" (click)="changePlan('None')">
+          <mat-card-title>Actual Plan: <b> {{plan}} </b></mat-card-title>
+          <mat-card-subtitler style="color: white">You're at day!</mat-card-subtitler>
+        </div>
+      </mat-card-header>
+      <mat-card-header *ngIf="plan==='None'" align="center" [style]="backgroundStyle">
+        <mat-icon class="head-icon">sentiment_dissatisfied</mat-icon>
+        <div class="header-plan">
+          <mat-card-title>{{getDescription()}}</mat-card-title>
+          <mat-card-subtitle style="color: white" *ngIf="currentSubscription === 'Free'">Please, select a plan</mat-card-subtitle>
+        </div>
+      </mat-card-header>
+      <mat-divider></mat-divider>
+      <br>
+      <mat-card-content class="subDetails">
+        <p class="description">
+          Subscribe to our plans... Lorem ipsum dolor sit amet, consectetur adipiscing elit
+        </p>
+        <div class="details-container">
+          <mat-card *ngFor="let subscription of subscriptions" [style]="premiumStyle">
+            <mat-card-header>
+              <mat-card-title> &#11088; {{subscription.name}} Plan</mat-card-title>
+              <mat-card-subtitle>Cost S/{{subscription.cost}} x mes</mat-card-subtitle>
+            </mat-card-header>
+            <div *ngIf="subscription.id === 1">
+              <mat-card-content>
+                <p>&#10004; No limit published properties</p>
+                <p>&#10004; Payment system</p>
+                <p>&#10004; Message System</p>
+                <!--p>&#10004; Bennefit Lorem ipsum</p-->
+              </mat-card-content>
+            </div>
+            <div *ngIf="subscription.id === 11">
+              <mat-card-content *ngIf="subscription.id === 11">
+                <p>&#8226; Max 3 published properties</p>
+                <p>&#8226; Payment system</p>
+
+                <!--p>&#8226; Bennefit Lorem ipsum</p-->
+                <!--p>&#8226; Bennefit Lorem ipsum</p-->
+                <span class="divider"></span>
+              </mat-card-content>
+            </div>
+            <mat-card-actions align="center" [style]="getButtonStyle(subscription)" *ngIf="subscription.name !== currentSubscription">
+              <button mat-flat-button class="card-button" (click)="changePlan(subscription.id)" >
+                <mat-icon>done</mat-icon> Subscribe</button>
+            </mat-card-actions>
+          </mat-card>
+          <!--mat-card [style]="premiumStyle">
+            <mat-card-header>
+              <mat-card-title> &#11088; Premium Plan</mat-card-title>
+              <mat-card-subtitle>Cost S/XX.XX x mes</mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content>
+              <p>&#10004; No limit published properties</p>
+              <p>&#10004; Payment system</p>
+              <p>&#10004; Message System</p>
+              <p>&#10004; Bennefit Lorem ipsum</p>
+            </mat-card-content>
+            <mat-card-actions align="center">
+              <button mat-flat-button class="card-button" (click)="changePlan(2)" >
+                <mat-icon>done</mat-icon> Subscribe</button>
+            </mat-card-actions>
+          </mat-card>
+          <mat-card [style]="basicStyle">
+            <mat-card-header>
+              <mat-card-title>Basic plan</mat-card-title>
+              <mat-card-subtitle>Cost S/XX.XX x mes</mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content>
+              <p>&#8226; Max 3 published properties</p>
+              <p>&#8226; Payment system</p>
+
+              <p>&#8226; Bennefit Lorem ipsum</p>
+              <p>&#8226; Bennefit Lorem ipsum</p>
+              <span class="divider"></span>
+            </mat-card-content>
+
+            <mat-card-actions align="center">
+
+              <button mat-flat-button class="card-button" style="margin-top: 20px"  (click)="changePlan(1)">
+                <mat-icon>done</mat-icon> Subscribe</button>
+            </mat-card-actions>
+          </mat-card-->
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

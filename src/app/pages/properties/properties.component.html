@@ -1,0 +1,36 @@
+<div class="principal-card">
+  <div class="section-header">
+    <div  class="name-title">
+      <mat-icon>house</mat-icon>
+      <span>Your properties</span>
+    </div>
+    <div class="section-actions">
+      <button mat-flat-button (click)="navigateToAddProperty()">Add property</button>
+    </div>
+  </div>
+  <div class="content section-grid">
+    <mat-card class="grid-card" *ngFor="let property of properties">
+      <mat-card-header class="grid-title">
+        <mat-card-title>
+          Property {{property.id}}
+        </mat-card-title>
+        <mat-card-subtitle>
+          {{property.title}}
+        </mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content class="grid-content">
+        <img [src]="getImage(property.id)" alt="property image">
+        <p>Size: {{property["size"]}} m<sup>2</sup> <br>
+          Its monthly price is S/.{{property["cost"]}}</p>
+        Location: {{property["address"]}}
+      </mat-card-content>
+      <mat-card-actions align="end">
+        <button mat-flat-button class="card-button" (click)="navigateToPropertyDetails(property)">See details</button>
+      </mat-card-actions>
+      <mat-card-footer  class="grid-footer" >
+        <p *ngIf="!property.active" style="color: red">Alquilado</p>
+        <p *ngIf="property.active">Disponible</p>
+      </mat-card-footer>
+    </mat-card>
+  </div>
+</div>

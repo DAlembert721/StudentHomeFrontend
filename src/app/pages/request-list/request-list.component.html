@@ -1,0 +1,46 @@
+<div class="principal-card request">
+  <div class="section-header">
+    <div  class="name-title">
+      <mat-icon>receipt</mat-icon>
+      <span>Your requests</span>
+    </div>
+  </div>
+  <div  class="content section-grid">
+    <div class="name-title" *ngIf="requests?.length === 0; else requestListView">
+      <span >You don't have any request</span>
+    </div>
+    <ng-template #requestListView>
+      <mat-card class="grid-card" *ngFor="let request of requests">
+        <div>
+          <mat-card-header  class="grid-title">
+            <mat-card-title>{{request.firstNameStudent}}  {{request.lastNameStudent}}</mat-card-title>
+            <mat-card-subtitle>{{request.createdAt}}</mat-card-subtitle>
+          </mat-card-header>
+          <mat-divider></mat-divider>
+          <br>
+          <mat-card-content class="grid-content" style="margin-left: 15px">
+            {{request.content}}
+          </mat-card-content>
+        </div>
+        <mat-card-actions align="end">
+          <button mat-flat-button
+                  class="card-button"
+                  *ngIf="type === 'landlord' && request.state === 'UNRESOLVED'"
+                  (click)="acceptRequest(request.id)">
+            <mat-icon>done</mat-icon> Accept</button>
+          <button mat-flat-button
+                  class="card-button"
+                  *ngIf="type === 'landlord' && request.state === 'UNRESOLVED'"
+                  (click)="denyRequest(request.id)">
+            <mat-icon>clear</mat-icon> Denied</button>
+          <button mat-flat-button
+                  class="card-button"
+                  *ngIf="type === 'student' && request.state === 'UNRESOLVED'"
+                  (click)="cancelRequest(request.id)">
+            <mat-icon>clear</mat-icon> Cancel</button>
+        </mat-card-actions>
+      </mat-card>
+    </ng-template>
+  </div>
+
+</div>
